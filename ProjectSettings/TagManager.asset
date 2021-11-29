@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Shop
+  - LimitZone
+  - Potions
+  - BSFragment
+  - BloodStone
+  - Heart
+  - Necromicon
+  - Catalizer
+  - Poison
+  - Antidote
+  - Weapon
+  - EnemyDeath
+  - SkeletonWeak
+  - HitBox
+  - PlatLimits
+  - CatDmg
+  - CheckPoint
+  - GhostDamage
+  - Cementery
+  - CementeryExit
+  - WoodsEnter
+  - GM
+  - BossDamage
+  - BSTrigger
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Background
+  - Water
+  - UI
+  - enviroment
+  - trees
+  - items
+  - floor
+  - InteractObj
+  - Player
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 3325297535
+    locked: 0
+  - name: enviroment
+    uniqueID: 1837635957
+    locked: 0
+  - name: enviroment2
+    uniqueID: 2068031219
+    locked: 0
+  - name: Trees&More
+    uniqueID: 2635333039
+    locked: 0
+  - name: floor
+    uniqueID: 2543280243
+    locked: 0
+  - name: items
+    uniqueID: 601354795
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: front
+    uniqueID: 3747812449
+    locked: 0
