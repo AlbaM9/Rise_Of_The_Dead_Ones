@@ -20,7 +20,21 @@ public class BossProjectile : MonoBehaviour
     public bool detectionON = false;
 
     //public bool attackmode;
+    public Vector2[] spawnPoints;
+    public int currentPoint;
+    public FireBossStatus fBStatus;
+    public float statCh;
 
+    public bool flip;
+    public enum FireBossStatus
+    {
+        TELEPORT,
+        IDLE,
+        ATTACK_1,
+
+
+
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -28,83 +42,126 @@ public class BossProjectile : MonoBehaviour
         animator = GetComponent<Animator>();
         detection = FindObjectOfType<GhostMOvement>();
         shootCooldown = timeToShoot;
-    }
+        fBStatus = FireBossStatus.IDLE;
+        animator.SetBool("Attack", false);
+        StartCoroutine(Statuses());
 
-    // Update is called once per frame
-    void Update()
-    {
-        RaySensor();
+        flip = false;
 
-        if (detectionON == true)
-        {
-            StartCoroutine(WaitAndAttack());
-
-            shootCooldown -= Time.deltaTime;
-
-
-
-
-            animator.SetBool("Attack", true);
-
-            if (shootCooldown < 0)
-            {
-                GameObject cross = Instantiate(projectile, shootPoint.position, Quaternion.identity);
-
-
-
-
-
-                cross.GetComponent<Rigidbody2D>().AddForce(new Vector2(-1000f, 0f), ForceMode2D.Force);
-
-
-
-                shootCooldown = timeToShoot;
-            }
-
-
-            else
-            {
-                animator.SetBool("Attack", false);
-            }
-        }
-
-       
-    }
-
-    private IEnumerator WaitAndAttack()
-    {
-
-
-        yield return new WaitForSeconds(5);
-        detectionON = true;
-        Debug.LogWarning("BU");
         
-
     }
-
-    public void RaySensor()
+    IEnumerator Statuses()
     {
-        Ray ray = new Ray(shootRay.position, transform.forward);
+        var randomAttack = Random.Range(1, 5);
 
-        float laserLength = 10f;
-        Debug.DrawRay(shootRay.position, Vector2.left * laserLength, Color.blue);
-        RaycastHit2D hit = Physics2D.Raycast(shootRay.position, Vector2.left, laserLength);
+        yield return new WaitForSeconds(statCh);
 
-        if (Physics2D.Raycast(shootRay.position, Vector2.left, laserLength, LayerMask.GetMask("Player")))
+        switch (randomAttack)
         {
+            case 1:
+                fBStatus = FireBossStatus.IDLE;
+                break;
+            case 2:
+                fBStatus = FireBossStatus.TELEPORT;
+                break;
+            case 3:
+                fBStatus = FireBossStatus.ATTACK_1;
+                break;
 
 
-            detectionON = true;
+        }
+        StatusChanger();
+    }
+    public void StatusChanger()
+    {
+        switch (fBStatus)
+        {
+            case FireBossStatus.TELEPORT:
 
+                Teleport();
+                StartCoroutine(Statuses());
+                break;
+            case FireBossStatus.IDLE:
+                StartCoroutine(Statuses());
+                break;
+            case FireBossStatus.ATTACK_1:
+                InvokeRepeating("Attack", 2f, 1f);
+                Attack();
+                CancelInvoke();
 
+                StartCoroutine(Statuses());
+                break;
+
+        }
+    }
+    public void Teleport()
+    {
+        animator.SetBool("Attack", false);
+        currentPoint = Random.Range(0, 6);
+
+        Vector2 posi1 = new Vector2(255f, 1.2f);
+        Vector2 posi2 = new Vector2(239.95f, -0.3f);
+        Vector2 posi3 = new Vector2(239.84f, 2.68f);
+
+        spawnPoints[0] = posi1;
+        spawnPoints[1] = posi2;
+        spawnPoints[2] = posi3;
+        spawnPoints[3] = posi1;
+        spawnPoints[4] = posi2;
+        spawnPoints[5] = posi3;
+
+        var teleport = spawnPoints[currentPoint];
+        transform.position = teleport;
+        if (teleport == posi2 || teleport == posi3)
+        {
+            flip = true;
+            transform.localScale = new Vector3(-0.5f, 0.5f, 0);
 
         }
         else
         {
-            detectionON = false;
-
+            flip = false;
+            transform.localScale = new Vector3(0.5f, 0.5f, 0);
         }
 
     }
+    void Update()
+    {
 
+
+
+
+
+
+    }
+
+
+
+
+    public void Attack()
+    {
+
+
+
+        animator.SetBool("Attack", true);
+
+
+
+        GameObject cross = Instantiate(projectile, shootPoint.position, Quaternion.identity);
+
+
+        if (flip == false)
+        {
+            cross.GetComponent<Rigidbody2D>().AddForce(transform.right * -1000 , ForceMode2D.Force);
+        }
+        else
+        {
+            cross.GetComponent<Rigidbody2D>().AddForce(transform.right * 1000 , ForceMode2D.Force);
+        }
+
+
+
+    }
+
+    
 }
