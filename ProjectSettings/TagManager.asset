@@ -28,6 +28,7 @@ TagManager:
   - GM
   - BossDamage
   - BSTrigger
+  - TriggInteraction
   layers:
   - Default
   - TransparentFX

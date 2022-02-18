@@ -26,6 +26,11 @@ public class BossProjectile : MonoBehaviour
     public float statCh;
 
     public bool flip;
+    public bool statusOn;
+    
+    public Transform player;
+
+    public float dist;
     public enum FireBossStatus
     {
         TELEPORT,
@@ -42,16 +47,36 @@ public class BossProjectile : MonoBehaviour
         animator = GetComponent<Animator>();
         detection = FindObjectOfType<GhostMOvement>();
         shootCooldown = timeToShoot;
-        fBStatus = FireBossStatus.IDLE;
+
+        
+        StartCoroutine(WaitAttack());
+
         animator.SetBool("Attack", false);
-        StartCoroutine(Statuses());
+
+        statusOn = false;
 
         flip = false;
 
+      
+
+       
+            
         
+
+
+    }
+    IEnumerator WaitAttack()
+    {
+        fBStatus = FireBossStatus.IDLE;
+        yield return new WaitForSeconds(5);
+        StartCoroutine(Statuses());
+
+
     }
     IEnumerator Statuses()
     {
+        // añadir aqui el tiempo de espera antes de atacar
+        
         var randomAttack = Random.Range(1, 5);
 
         yield return new WaitForSeconds(statCh);
@@ -85,11 +110,12 @@ public class BossProjectile : MonoBehaviour
                 StartCoroutine(Statuses());
                 break;
             case FireBossStatus.ATTACK_1:
-                InvokeRepeating("Attack", 2f, 1f);
                 Attack();
-                CancelInvoke();
-
+                InvokeRepeating("Attack", 0.01f, 0.01f);
+        
                 StartCoroutine(Statuses());
+               
+                CancelInvoke();
                 break;
 
         }
@@ -128,24 +154,33 @@ public class BossProjectile : MonoBehaviour
     void Update()
     {
 
-
-
+       // DistCalculator();
+    
 
 
 
     }
+    void DistCalculator() 
+    {
+         dist = Vector2.Distance(player.position, transform.position);
+        if (dist <= 3)
+        {
+            Debug.Log("Detectado");
+            detectionON = true;
+            
+            detectionON = false;
+            statusOn = true;
 
 
+        }
 
+    }
+  
 
     public void Attack()
     {
 
-
-
         animator.SetBool("Attack", true);
-
-
 
         GameObject cross = Instantiate(projectile, shootPoint.position, Quaternion.identity);
 
@@ -159,9 +194,10 @@ public class BossProjectile : MonoBehaviour
             cross.GetComponent<Rigidbody2D>().AddForce(transform.right * 1000 , ForceMode2D.Force);
         }
 
-
+        
 
     }
 
     
+   
 }

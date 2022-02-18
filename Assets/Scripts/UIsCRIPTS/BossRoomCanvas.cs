@@ -8,16 +8,16 @@ public class BossRoomCanvas : MonoBehaviour
     public BossProjectile attack;
     public BossStats lifebar;
     public GameObject walls;
-    public GameObject canvas;
-    public Text bossName;
-   
 
-    
+    public GameObject canvasBossy;
+
+    public Image bossLIndicator;
+
     void Start()
     {
         walls.SetActive(false);
-        canvas.SetActive(false);
-        
+        bossLIndicator.enabled = false;
+        canvasBossy.SetActive(false);
         
         
     }
@@ -34,7 +34,7 @@ public class BossRoomCanvas : MonoBehaviour
         {
 
             walls.SetActive(true);
-            canvas.SetActive(true);
+            
             
             
            

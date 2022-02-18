@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class PlayerController : MonoBehaviour
 {
+    public GameObject finalScene;
     public float speed, jumpHeight;
     float velX, velY;
     Rigidbody2D rb;
@@ -18,20 +20,22 @@ public class PlayerController : MonoBehaviour
     private int CountJump = 1;
     public int siDoubJumpEnabled = 0;
 
-    
+    public GameObject boss;
+    public Vector2 bosspos;
     
 
     Animator anim;
     public PlayerStats stats;
-
     
+
     void Start()
     {
-
-        
+        bosspos = new Vector2(253.84f, -1.23f);
+        finalScene.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         stats = FindObjectOfType<PlayerStats>();
+        
     }
 
     
@@ -170,5 +174,25 @@ public class PlayerController : MonoBehaviour
         }
         
             
+    }
+   
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag ==  "TriggInteraction")
+        {
+            Instantiate(boss, bosspos, Quaternion.identity);
+            
+            StartCoroutine(WaitAttack());
+
+
+        }
+    }
+    IEnumerator WaitAttack()
+    {
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        yield return new WaitForSeconds(5);
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+
     }
 }

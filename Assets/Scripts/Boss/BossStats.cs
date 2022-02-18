@@ -4,23 +4,30 @@ using UnityEngine;
 using UnityEngine.UI;
 public class BossStats : MonoBehaviour
 {
-    public GameObject finalScene;
-    public Image bossLIndicator;
+   
+    
     private float bosslife;
     public Animator anim;
 
     public BossRoomCanvas lifebar;
+    public PlayerController pla;
 
     // public Transform originRay;
 
-
+    public BossRoomCanvas room;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        finalScene.SetActive(false);
+        
+        room = FindObjectOfType<BossRoomCanvas>();
+        room. canvasBossy.SetActive(true);
+        room.bossLIndicator.enabled = true;
+        pla = FindObjectOfType<PlayerController>();
+
+        
         anim = GetComponent<Animator>();
         bosslife = 300f;
     }
@@ -28,11 +35,12 @@ public class BossStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bossLIndicator.fillAmount =bosslife / 300;
+        room.bossLIndicator.fillAmount =bosslife / 300;
+
         if (bosslife <= 0)
         {
            
-            finalScene.SetActive(true) ;
+            pla.finalScene.SetActive(true) ;
             anim.SetBool("Death", true);
             Time.timeScale = 0;
 
