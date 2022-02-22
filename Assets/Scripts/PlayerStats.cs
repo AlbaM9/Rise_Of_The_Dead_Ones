@@ -151,10 +151,8 @@ public class PlayerStats : MonoBehaviour
 
         if (target.tag == "SkeletonWeak")
         {
+
             getDamaged = false;
-           
-
-
 
         }
         if (target.gameObject.tag == "CatDmg")

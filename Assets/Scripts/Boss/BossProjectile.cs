@@ -97,6 +97,7 @@ public class BossProjectile : MonoBehaviour
         }
         StatusChanger();
     }
+
     public void StatusChanger()
     {
         switch (fBStatus)
@@ -111,7 +112,7 @@ public class BossProjectile : MonoBehaviour
                 break;
             case FireBossStatus.ATTACK_1:
                 Attack();
-                InvokeRepeating("Attack", 0.01f, 0.01f);
+                InvokeRepeating("Attack", 0.01f, 0.005f);
         
                 StartCoroutine(Statuses());
                
@@ -141,37 +142,13 @@ public class BossProjectile : MonoBehaviour
         if (teleport == posi2 || teleport == posi3)
         {
             flip = true;
-            transform.localScale = new Vector3(-0.5f, 0.5f, 0);
+            transform.localScale = new Vector3(-2f, 2f, 2);
 
         }
         else
         {
             flip = false;
-            transform.localScale = new Vector3(0.5f, 0.5f, 0);
-        }
-
-    }
-    void Update()
-    {
-
-       // DistCalculator();
-    
-
-
-
-    }
-    void DistCalculator() 
-    {
-         dist = Vector2.Distance(player.position, transform.position);
-        if (dist <= 3)
-        {
-            Debug.Log("Detectado");
-            detectionON = true;
-            
-            detectionON = false;
-            statusOn = true;
-
-
+            transform.localScale = new Vector3(2f, 2f, 2);
         }
 
     }

@@ -23,10 +23,10 @@ public class BossStats : MonoBehaviour
     {
         
         room = FindObjectOfType<BossRoomCanvas>();
-        room. canvasBossy.SetActive(true);
+       // room. canvasBossy.SetActive(true);
         room.bossLIndicator.enabled = true;
         pla = FindObjectOfType<PlayerController>();
-
+        room.canDefeat.enabled = true;
         
         anim = GetComponent<Animator>();
         bosslife = 300f;
@@ -39,10 +39,13 @@ public class BossStats : MonoBehaviour
 
         if (bosslife <= 0)
         {
-           
-            pla.finalScene.SetActive(true) ;
+            room.canDefeat.enabled = false;
+            room.defeated.enabled = true;
             anim.SetBool("Death", true);
-            Time.timeScale = 0;
+
+            StartCoroutine(WaitDeath());
+
+           
 
 
 
@@ -75,6 +78,20 @@ public class BossStats : MonoBehaviour
             anim.SetBool("Getdamaged", false);
             
         }
+
+
+    }
+
+    IEnumerator WaitDeath()
+    {
+        
+       
+        yield return new WaitForSeconds(5);
+        room.canvasBossy.SetActive(false);
+        Time.timeScale = 0;
+        room.defeated.enabled = false;
+        pla.finalScene.SetActive(true);
+
 
 
     }

@@ -12,14 +12,16 @@ public class BossRoomCanvas : MonoBehaviour
     public GameObject canvasBossy;
 
     public Image bossLIndicator;
+    public Text canDefeat;
+    public Text defeated;
 
     void Start()
     {
         walls.SetActive(false);
         bossLIndicator.enabled = false;
         canvasBossy.SetActive(false);
-        
-        
+        canDefeat.enabled = false;
+        defeated.enabled = false;
     }
 
     // Update is called once per frame

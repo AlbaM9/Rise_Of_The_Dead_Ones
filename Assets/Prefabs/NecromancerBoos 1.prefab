@@ -31,8 +31,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8589274894853190762}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 253.84, y: -1.23, z: 50}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 253.84, y: -1.25, z: 50}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 1034316130337511387}
   m_Father: {fileID: 0}
@@ -78,9 +78,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2761542713036213869, guid: dc76c49f4576fb44f99add96b0eb0ce5, type: 3}
+  m_Sprite: {fileID: -5957889397408292130, guid: b3608b4e74bcf22488beec27a56beb5a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 5.760617, y: 5.2999997}
@@ -101,11 +101,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1558e9fd6a550f64bb237a0219ea6092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossLIndicator: {fileID: 1408642608233470832, guid: 70ac6c404159b504b8b277e71e7fed9b, type: 3}
   anim: {fileID: 0}
   lifebar: {fileID: 0}
   pla: {fileID: 0}
-  canvasBossy: {fileID: 950761623453317044, guid: dace2d816f408eb4091598d92aac8d37, type: 3}
+  room: {fileID: 0}
 --- !u!95 &252974367470836762
 Animator:
   serializedVersion: 3
@@ -193,8 +192,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.86094666, y: -0.5339321}
-  m_Size: {x: 2.0219421, y: 3.2616303}
+  m_Offset: {x: 0.0043678284, y: -0.36925328}
+  m_Size: {x: 0.6714554, y: 0.8115022}
   m_Direction: 0
 --- !u!61 &4864145732207592850
 BoxCollider2D:
@@ -209,18 +208,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.90663147, y: -1.0386871}
+  m_Offset: {x: -0.15827179, y: -0.37542117}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.5705967, y: 5.87}
+    oldSize: {x: 1.08, y: 1.56}
     newSize: {x: 5.760617, y: 5.2999997}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.6075134, y: 1.7009585}
+  m_Size: {x: 0.3708954, y: 0.67593575}
   m_EdgeRadius: 0
 --- !u!1 &8626119757416266282
 GameObject:
@@ -246,7 +245,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8626119757416266282}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.52, y: -0.8, z: 0}
+  m_LocalPosition: {x: -0.256, y: -0.052, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3244894071080554194}

@@ -26,10 +26,11 @@ public class PlayerController : MonoBehaviour
 
     Animator anim;
     public PlayerStats stats;
-    
+    public BossRoomCanvas room;
 
     void Start()
     {
+        room = FindObjectOfType<BossRoomCanvas>();
         bosspos = new Vector2(253.84f, -1.23f);
         finalScene.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
@@ -190,8 +191,12 @@ public class PlayerController : MonoBehaviour
     IEnumerator WaitAttack()
     {
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        room.canDefeat.enabled = true;
         yield return new WaitForSeconds(5);
+        room.canDefeat.enabled = false;
+        room.canvasBossy.SetActive(true);
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        
 
 
     }
