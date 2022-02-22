@@ -31,6 +31,9 @@ public class BossProjectile : MonoBehaviour
     public Transform player;
 
     public float dist;
+    public float time;
+
+    public bool instanceB;
     public enum FireBossStatus
     {
         TELEPORT,
@@ -42,6 +45,8 @@ public class BossProjectile : MonoBehaviour
     }
     void Start()
     {
+        instanceB = false;
+        
         rb = GetComponent<Rigidbody2D>();
         attack = FindObjectOfType<BossRoomCanvas>();
         animator = GetComponent<Animator>();
@@ -65,13 +70,46 @@ public class BossProjectile : MonoBehaviour
 
 
     }
+    private void Update()
+    {
+        time += Time.deltaTime;
+
+        if (instanceB == true)
+        {
+            if (time >= 0.5f)
+            {
+                GameObject cross = Instantiate(projectile, shootPoint.position, Quaternion.identity);
+
+
+                if (flip == false)
+                {
+                    cross.GetComponent<Rigidbody2D>().AddForce(transform.right * -1000, ForceMode2D.Force);
+                }
+                else
+                {
+                    cross.GetComponent<Rigidbody2D>().AddForce(transform.right * 1000, ForceMode2D.Force);
+                }
+
+                time = 0;
+            }
+
+
+           
+
+
+
+        }
+    }
     IEnumerator WaitAttack()
     {
         fBStatus = FireBossStatus.IDLE;
         yield return new WaitForSeconds(5);
+        transform.position = new Vector2(254.61f, 1.03f);
         StartCoroutine(Statuses());
 
+      
 
+        
     }
     IEnumerator Statuses()
     {
@@ -112,8 +150,8 @@ public class BossProjectile : MonoBehaviour
                 break;
             case FireBossStatus.ATTACK_1:
                 Attack();
-                InvokeRepeating("Attack", 0.01f, 0.005f);
-        
+               // InvokeRepeating("Attack", 0.01f, 0.005f);
+                
                 StartCoroutine(Statuses());
                
                 CancelInvoke();
@@ -126,7 +164,7 @@ public class BossProjectile : MonoBehaviour
         animator.SetBool("Attack", false);
         currentPoint = Random.Range(0, 6);
 
-        Vector2 posi1 = new Vector2(255f, 1.2f);
+        Vector2 posi1 = new Vector2(254.61f, 1.03f);
         Vector2 posi2 = new Vector2(239.95f, -0.3f);
         Vector2 posi3 = new Vector2(239.84f, 2.68f);
 
@@ -156,22 +194,30 @@ public class BossProjectile : MonoBehaviour
 
     public void Attack()
     {
-
-        animator.SetBool("Attack", true);
-
-        GameObject cross = Instantiate(projectile, shootPoint.position, Quaternion.identity);
-
-
-        if (flip == false)
-        {
-            cross.GetComponent<Rigidbody2D>().AddForce(transform.right * -1000 , ForceMode2D.Force);
-        }
-        else
-        {
-            cross.GetComponent<Rigidbody2D>().AddForce(transform.right * 1000 , ForceMode2D.Force);
-        }
-
         
+        animator.SetBool("Attack", true);
+        instanceB = true;
+       
+        /*
+             GameObject cross = Instantiate(projectile, shootPoint.position, Quaternion.identity);
+             if (flip == false)
+             {
+                 cross.GetComponent<Rigidbody2D>().AddForce(transform.right * -1000, ForceMode2D.Force);
+             }
+             else
+             {
+                 cross.GetComponent<Rigidbody2D>().AddForce(transform.right * 1000, ForceMode2D.Force);
+             }
+
+             */
+
+
+
+
+
+
+
+
 
     }
 
