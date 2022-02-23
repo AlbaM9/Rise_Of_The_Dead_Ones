@@ -16,11 +16,14 @@ public class SavedData : MonoBehaviour
     public bool savedDataON = false;
     public Transform playerPos;
 
+    public NecromPages necrom;
 
 
 
     private void Awake()
     {
+        necrom = FindObjectOfType<NecromPages>();
+        
         items = FindObjectOfType<PlayerStats>();
         dJumpSave = FindObjectOfType<PlayerController>();
 
@@ -31,6 +34,7 @@ public class SavedData : MonoBehaviour
         savedText.enabled = false;
 
 
+        LoadNecromPages();
 
         items.potions = PlayerPrefs.GetInt("Potion");
         items.catalizer = PlayerPrefs.GetInt("catalizer");
@@ -79,6 +83,7 @@ public class SavedData : MonoBehaviour
             PlayerPrefs.SetFloat("life", items.life);
             PlayerPrefs.SetInt("DoubJump", dJumpSave.DoubJump ? 1 : 0);
 
+            SaveNecromPages();
             SavePosition();
             savedDataON = true;
 
@@ -115,7 +120,35 @@ public class SavedData : MonoBehaviour
         playerPos.position = new Vector2(position.x, position.y);
     }
      
-   
+   public void SaveNecromPages() 
+    {
 
+        PlayerPrefs.SetInt("NPag1", items.have1);
+        PlayerPrefs.SetInt("NPag2", items.have2);
+        PlayerPrefs.SetInt("NPag3", items.have3);
+        PlayerPrefs.SetInt("NPag4", items.have4);
+        PlayerPrefs.SetInt("NPag5", items.have5);
+        PlayerPrefs.SetInt("NPag6", items.have6);
+        PlayerPrefs.SetInt("NPag7", items.have7);
+        PlayerPrefs.SetInt("NPag8", items.have8);
+        PlayerPrefs.SetInt("NPag9", items.have9);
+        PlayerPrefs.SetInt("NPag10", items.have10);
+    
+    }
+    public void LoadNecromPages()
+    {
+
+        items.have1 = PlayerPrefs.GetInt("NPag1", 0);
+        items.have2 = PlayerPrefs.GetInt("NPag2", 0);
+        items.have3 = PlayerPrefs.GetInt("NPag3", 0);
+        items.have4 = PlayerPrefs.GetInt("NPag4", 0);
+        items.have5 = PlayerPrefs.GetInt("NPag5", 0);
+        items.have6 = PlayerPrefs.GetInt("NPag6", 0);
+        items.have7 = PlayerPrefs.GetInt("NPag7", 0);
+        items.have8 = PlayerPrefs.GetInt("NPag8", 0);
+        items.have9 = PlayerPrefs.GetInt("NPag9", 0);
+        items.have10 = PlayerPrefs.GetInt("NPag10", 0);
+
+    }
 
 }

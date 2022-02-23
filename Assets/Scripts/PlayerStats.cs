@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
-    
 
+    public NecromPages necrom;
     public float life;
     public float maxLife = 200f;
     
@@ -33,9 +33,22 @@ public class PlayerStats : MonoBehaviour
     public Button mainMenu;
     public Button continueGame;
 
-   
+    public int have1;
+    public int have2;
+    public int have3;
+    public int have4;
+    public int have5;
+    public int have6;
+    public int have7;
+    public int have8;
+    public int have9;
+    public int have10;
+
     void Start()
     {
+        necrom = FindObjectOfType<NecromPages>();
+        necrom.ElimPages();
+
         life = maxLife;
         
         getDamaged = false;

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3142580311348796195}
   - component: {fileID: 3142580311348796204}
   - component: {fileID: 3142580311348796205}
-  - component: {fileID: 9040798103010317156}
+  - component: {fileID: 215919013158684625}
   m_Layer: 0
   m_Name: Necromicon
   m_TagString: Necromicon
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3142580311348796194}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.55, y: 5.64, z: 155.8178}
   m_LocalScale: {x: 0.03206824, y: 0.03206824, z: 0.03206824}
   m_Children: []
@@ -110,7 +110,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.7264767, y: 6.21127}
   m_EdgeRadius: 0
---- !u!114 &9040798103010317156
+--- !u!114 &215919013158684625
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,3 +122,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78782e3f632c64d41b52cc9c5a12e6be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  necro: {fileID: 0}
+  necromPag:
+  - {fileID: 3142580311348796194}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  ihaveIt: 0
